@@ -30,6 +30,9 @@
       bindkey "^[[1;5C" forward-word # ctrl right
       bindkey "^H" backward-kill-word # ctrl back
       bindkey "^[[3;5~" kill-word # ctrl del
+
+      zstyle ':completion*' menu select
+      zstyle ':completion*' rehash true
     '';
   };
 }
