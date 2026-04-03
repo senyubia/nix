@@ -10,6 +10,7 @@
     # cli tools
     tree
     yazi
+    dysk
 
     # system tools
     btop
