@@ -1,10 +1,7 @@
 { pkgs, config, assets, ... }: {
   home.file.".p10k.zsh".source = "${assets}/p10k.zsh";
 
-  programs.zsh = 
-  let
-    flakeDir = "${config.home.homeDirectory}/nix";
-  in {
+  programs.zsh = {
     enable = true;
 
     enableCompletion = true;
