@@ -28,6 +28,11 @@
 
     initContent = ''
       [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+      bindkey "^[[1;5D" backward-word # ctrl left
+      bindkey "^[[1;5C" forward-word # ctrl right
+      bindkey "^H" backward-kill-word # ctrl back
+      bindkey "^[[3;5~" kill-word # ctrl del
     '';
   };
 }
