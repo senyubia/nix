@@ -2,13 +2,13 @@
   environment.systemPackages = with pkgs; [
     # applications
     vscode
-    feh
     discord
 
     # cli tools
     yazi
     dysk
     eza
+    imv
 
     # system tools
     btop
