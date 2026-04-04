@@ -43,7 +43,6 @@
       modules = [
         "${selectedHost}/configuration.nix"
         "${selectedHost}/hardware.nix"
-        "${selectedHost}/packages.nix"
 
         home-manager.nixosModules.home-manager
         {
@@ -55,6 +54,8 @@
             extraSpecialArgs = { inherit inputs host user assets; };
 
             users.${user.name}.imports = [
+              "${selectedHost}/packages.nix"
+
               {
                 home = {
                   username = user.name;
