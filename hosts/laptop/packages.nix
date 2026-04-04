@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-  nixpkgs.config.allowUnfree = true;
-
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     # applications
     vscode
     feh
@@ -17,8 +15,5 @@
     lshw
     powertop
     mesa-demos
-
-    # nixos
-    home-manager
   ];
 }

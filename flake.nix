@@ -43,24 +43,29 @@
       modules = [
         "${selectedHost}/configuration.nix"
         "${selectedHost}/hardware.nix"
-      ] ++ systemModules;
-    };
+        "${selectedHost}/packages.nix"
 
-    homeConfigurations.${user.name} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${host.arch};
-
-      extraSpecialArgs = { inherit inputs host user assets; };
-
-      modules = [
+        home-manager.nixosModules.home-manager
         {
-          home = {
-            username = user.name;
-            homeDirectory = "/home/${user.name}";
-            stateVersion = host.state;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+
+            extraSpecialArgs = { inherit inputs host user assets; };
+
+            users.${user.name}.imports = [
+              {
+                home = {
+                  username = user.name;
+                  homeDirectory = "/home/${user.name}";
+                  stateVersion = host.state;
+                };
+              }
+            ] ++ userModules;
           };
         }
-        "${selectedHost}/packages.nix"
-      ] ++ userModules;
+      ] ++ systemModules;
     };
   };
 }
