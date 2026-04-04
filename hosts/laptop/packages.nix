@@ -8,9 +8,9 @@
     discord
 
     # cli tools
-    tree
     yazi
     dysk
+    eza
 
     # system tools
     btop

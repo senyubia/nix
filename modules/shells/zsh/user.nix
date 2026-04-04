@@ -9,7 +9,11 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      ls = "eza -h --icons";
+      l = "ls -al";
       la = "ls -a";
+      ll = "ls -l";
+      tree = "ls -T";
 
       ff = "fastfetch";
       icat = "kitten icat";
