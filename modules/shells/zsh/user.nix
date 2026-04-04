@@ -17,7 +17,6 @@
 
       ff = "fastfetch";
       icat = "kitten icat";
-      btop = "btop -t";
     };
 
     plugins = [

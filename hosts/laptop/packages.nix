@@ -11,7 +11,6 @@
     imv
 
     # system tools
-    btop
     lshw
     powertop
     mesa-demos
