@@ -3,6 +3,8 @@
     # applications
     vscode
     discord
+    lutris
+    steam
 
     # cli tools
     yazi
