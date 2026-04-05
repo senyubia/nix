@@ -113,6 +113,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    nvitop
+
     (writeShellScriptBin "gpu-toggle" ''
       if [ ! -d "/sys/bus/pci/devices/0000:03:00.0" ]; then
         SVC=switch-to-nvidia
