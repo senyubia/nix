@@ -207,6 +207,10 @@
         };
       };
 
+      dock = {
+        enabled = false;
+      };
+
       calendar = {
         cards = [
           { id = "calendar-header-card"; enabled = true; }
