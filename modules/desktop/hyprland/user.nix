@@ -7,7 +7,10 @@
     enable = true;  
     
     settings = {
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "eDP-1,preferred,auto,auto"
+        ", preferred, auto, 1, mirror, eDP-1"
+      ];
 
       exec-once = [
         "noctalia-shell &"
