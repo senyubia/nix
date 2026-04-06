@@ -1,4 +1,4 @@
-{ config, inputs, assets, ... }: {
+{ config, inputs, assets, host, ... }: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -8,8 +8,8 @@
     
     settings = {
       monitor = [
-        "eDP-1,preferred,auto,auto"
-        ", preferred, auto, 1, mirror, eDP-1"
+        "eDP-1,${host.resolution},auto,auto"
+        ",${host.resolution},auto,1,mirror,eDP-1"
       ];
 
       exec-once = [
