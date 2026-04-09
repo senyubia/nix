@@ -1,12 +1,10 @@
 { user, pkgs, ... }: {
   programs.nh = {
     enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep 5";
     flake = "/home/${user.name}/nix";
   };
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     (writeShellScriptBin "ns" ''
       if [ $# -eq 0 ]; then
         echo "Usage: ns <package1> <package2> ..."
