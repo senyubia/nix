@@ -6,6 +6,7 @@
     "system/printing"
     "system/bluetooth"
     "system/battery"
+    "system/ssh"
 
     "shells/zsh"
 
