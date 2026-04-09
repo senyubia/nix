@@ -8,8 +8,8 @@
     
     settings = {
       monitor = [
-        "eDP-1,${host.resolution},auto,auto"
-        ",${host.resolution},auto,1,mirror,eDP-1"
+        "eDP-1,${host.resolution}@${host.refreshRate},auto,auto"
+        ",${host.resolution}@60,auto,1,mirror,eDP-1"
       ];
 
       exec-once = [

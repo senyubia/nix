@@ -3,7 +3,8 @@
       name = "rhea";
       arch = "x86_64-linux";
       state = "26.05";
-      resolution = "1366x768@60";
+      resolution = "1366x768";
+      refreshRate = "60";
     };
 
   user = {
