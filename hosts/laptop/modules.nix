@@ -16,6 +16,7 @@
     "programs/thunar"
     "programs/git"
     "programs/btop"
+    "programs/gnupg"
 
     "desktop/hyprland"
 
