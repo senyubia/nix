@@ -9,7 +9,7 @@
     music = "${config.home.homeDirectory}/music";
     pictures = "${config.home.homeDirectory}/pics";
     videos = "${config.home.homeDirectory}/vids";
-    desktop = null;
+    desktop = "${config.home.homeDirectory}/docs";
     publicShare = null;
     templates = null;
   };
