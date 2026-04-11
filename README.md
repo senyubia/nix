@@ -8,7 +8,7 @@ From a live NixOS ISO environment (with Internet connection):
 clone https://github.com/senyubia/nix.git
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ./nix/hosts/<HOST>/disk.nix
 sudo nixos-install --flake ./nix#<HOSTNAME>
-sudo chroot /mnt
+sudo nixos-enter
 passwd <USER>
 exit
 shutdown now
