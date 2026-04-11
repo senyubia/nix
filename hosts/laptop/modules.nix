@@ -20,6 +20,7 @@
     "programs/gnupg"
 
     "desktop/hyprland"
+    "desktop/hyprland-nvidia-laptop-compat"
 
     "config/locales"
     "config/xdgUserDirs"
