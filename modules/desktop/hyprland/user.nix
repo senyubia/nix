@@ -5,11 +5,11 @@
   
   wayland.windowManager.hyprland = {
     enable = true;  
-    
+
     settings = {
       monitor = [
-        "eDP-1,${host.resolution}@${host.refreshRate},auto,auto"
-        ",${host.resolution}@60,auto,1,mirror,eDP-1"
+        "${host.monitor},${host.resolution}@${host.refreshRate},auto,auto"
+        ",${host.resolution}@60,auto,1,mirror,${host.monitor}"
       ];
 
       exec-once = [
