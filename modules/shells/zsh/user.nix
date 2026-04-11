@@ -9,7 +9,7 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ls = "eza -h --icons";
+      ls = "eza -h --icons || ls --color=tty";
       l = "ls -al";
       la = "ls -a";
       ll = "ls -l";
