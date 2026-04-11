@@ -48,6 +48,7 @@
       modules = [
         "${selectedHost}/configuration.nix"
         "${selectedHost}/hardware.nix"
+        "${selectedHost}/packages.nix"
 
         disko.nixosModules.disko
         "${selectedHost}/disk.nix"
@@ -62,8 +63,6 @@
             extraSpecialArgs = { inherit inputs host user assets; };
 
             users.${user.name}.imports = [
-              "${selectedHost}/packages.nix"
-
               {
                 home = {
                   username = user.name;
