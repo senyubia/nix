@@ -64,6 +64,8 @@
   environment.systemPackages = with pkgs; [
     grimblast
 
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+
     (where-is-my-sddm-theme.override {
       themeConfig.General = {
         passwordFontSize = "18";

@@ -2,7 +2,7 @@
   imports = [
     inputs.noctalia.homeModules.default
   ];
-  
+
   wayland.windowManager.hyprland = {
     enable = true;  
 
