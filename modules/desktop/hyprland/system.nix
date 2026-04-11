@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }: {
+{ config, user, pkgs, inputs, ... }: {
   programs = {
     hyprland.enable = true;
     xwayland.enable = true;
@@ -48,7 +48,7 @@
       lid_state=$(cat /proc/acpi/button/lid/LID0/state | ${pkgs.gawk}/bin/awk '{print $NF}')
 
       if [ $lid_state = "closed" ]; then
-        /run/wrappers/bin/sudo -u sen WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 \
+        /run/wrappers/bin/sudo -u ${user.name} WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 \
         ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call lockScreen lock
         sleep 2
 
