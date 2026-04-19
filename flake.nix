@@ -45,7 +45,7 @@
 
       specialArgs = { inherit inputs host user assets; };
 
-      modules = [
+      modules = systemModules ++ [
         {
           nix.settings.experimental-features = [ "nix-command" "flakes" ];
           nixpkgs.config.allowUnfree = true;
@@ -76,7 +76,7 @@
 
             extraSpecialArgs = { inherit inputs host user assets; };
 
-            users.${user.name}.imports = [
+            users.${user.name}.imports = userModules ++ [
               {
                 home = {
                   username = user.name;
@@ -84,10 +84,10 @@
                   stateVersion = host.state;
                 };
               }
-            ] ++ userModules;
+            ];
           };
         }
-      ] ++ systemModules;
+      ];
     };
   };
 }
