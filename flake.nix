@@ -46,7 +46,21 @@
       specialArgs = { inherit inputs host user assets; };
 
       modules = [
-        "${selectedHost}/configuration.nix"
+        {
+          nix.settings.experimental-features = [ "nix-command" "flakes" ];
+          nixpkgs.config.allowUnfree = true;
+
+          networking.hostName = host.name;
+
+          users.users.${user.name} = {
+            isNormalUser = true;
+            description = user.fullName;
+            extraGroups = [ "networkmanager" "wheel" ];
+          };
+
+          system.stateVersion = host.state;
+        }
+
         "${selectedHost}/hardware.nix"
         "${selectedHost}/packages.nix"
 

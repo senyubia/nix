@@ -1,5 +1,7 @@
 {
   modules = [
+    "bootloader/grub"
+
     "system/network"
     "system/audio"
     "system/nvidia-laptop"
