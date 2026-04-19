@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     disko = {
       url = "github:nix-community/disko";
@@ -25,7 +26,7 @@
     };
   };
 
-  outputs = { nixpkgs, disko, home-manager, ...} @ inputs:
+  outputs = { nixpkgs, nixpkgs-stable, disko, home-manager, ...} @ inputs:
   let
     getModuleFile = fileName: moduleName:
       let path = ./. + "/modules/${moduleName}/${fileName}";
@@ -48,7 +49,19 @@
       modules = systemModules ++ [
         {
           nix.settings.experimental-features = [ "nix-command" "flakes" ];
-          nixpkgs.config.allowUnfree = true;
+
+          nixpkgs = {
+            config.allowUnfree = true;
+
+            overlays = [
+              (final: prev: {
+                stable = import nixpkgs-stable {
+                  system = host.arch;
+                  config.allowUnfree = true;
+                };
+              })
+            ];
+          };
 
           networking.hostName = host.name;
 
