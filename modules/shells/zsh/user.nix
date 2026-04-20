@@ -9,7 +9,9 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ls = "eza -h --icons || ls --color=tty";
+      cat = "bat";
+
+      ls = "eza -h --icons";
       l = "ls -al";
       la = "ls -a";
       ll = "ls -l";

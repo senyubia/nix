@@ -9,7 +9,6 @@
     # cli tools
     yazi
     dysk
-    eza
     imv
 
     # system tools
