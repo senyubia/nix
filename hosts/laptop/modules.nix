@@ -4,7 +4,7 @@
 
     "system/network"
     "system/audio"
-    "system/nvidia-laptop"
+    "system/nvidia-optimus"
     "system/printing"
     "system/bluetooth"
     "system/battery"
