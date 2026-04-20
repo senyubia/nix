@@ -28,13 +28,13 @@
 
   outputs = { nixpkgs, nixpkgs-stable, disko, home-manager, ...} @ inputs:
   let
+    config = import ./config.nix;
     helpLib = import ./lib/helpers.nix { root = ./.; };
 
-    selectedHost = ./hosts/laptop; # TODO: select correct host
     assets = ./assets;
-    inherit (import "${selectedHost}/info.nix") host user;
+    inherit (import "${config.selectedHost}/info.nix") host user;
 
-    hostModules = import "${selectedHost}/modules.nix";
+    hostModules = import "${config.selectedHost}/modules.nix";
     systemModules = builtins.concatLists (map helpLib.getSystemModule hostModules.modules);
     userModules = builtins.concatLists (map helpLib.getUserModule hostModules.modules);
 
@@ -72,11 +72,11 @@
           system.stateVersion = host.state;
         }
 
-        "${selectedHost}/hardware.nix"
-        "${selectedHost}/packages.nix"
+        "${config.selectedHost}/hardware.nix"
+        "${config.selectedHost}/packages.nix"
 
         disko.nixosModules.disko
-        "${selectedHost}/disk.nix"
+        "${config.selectedHost}/disk.nix"
 
         home-manager.nixosModules.home-manager
         {

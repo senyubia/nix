@@ -1,0 +1,3 @@
+{
+  selectedHost = ./hosts/laptop;
+}
