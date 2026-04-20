@@ -1,5 +1,7 @@
 { inputs, helpLib, host, ... }: {
-  imports = helpLib.getUserModule "desktop/noctalia";
+  imports = [
+    (helpLib.getUserModule "desktop/noctalia")
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;  

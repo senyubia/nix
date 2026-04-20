@@ -35,8 +35,8 @@
     inherit (import "${config.selectedHost}/info.nix") host user;
 
     hostModules = import "${config.selectedHost}/modules.nix";
-    systemModules = builtins.concatLists (map helpLib.getSystemModule hostModules.modules);
-    userModules = builtins.concatLists (map helpLib.getUserModule hostModules.modules);
+    systemModules = builtins.filter (m: m != null) (map helpLib.getSystemModule hostModules.modules);
+    userModules = builtins.filter (m: m != null) (map helpLib.getUserModule hostModules.modules);
 
   in {
     nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {

@@ -1,3 +1,5 @@
 { helpLib, ... }: {
-  imports = helpLib.getUserModule "desktop/hyprland";
+  imports = [
+    (helpLib.getUserModule "desktop/hyprland")
+  ];
 }

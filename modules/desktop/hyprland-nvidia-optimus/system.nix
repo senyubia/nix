@@ -1,5 +1,7 @@
 { helpLib, ... }: {
-  imports = helpLib.getSystemModule "desktop/hyprland";
+  imports = [
+    (helpLib.getSystemModule "desktop/hyprland")
+  ];
 
   specialisation.dgpu.configuration = {
     environment.sessionVariables = {

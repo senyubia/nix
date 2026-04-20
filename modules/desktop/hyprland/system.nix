@@ -1,5 +1,7 @@
 { pkgs, inputs, helpLib, user, ... }: {
-  imports = helpLib.getSystemModule "desktop/noctalia";
+  imports = [
+    (helpLib.getSystemModule "desktop/noctalia")
+  ];
 
   programs.hyprland = {
     enable = true;

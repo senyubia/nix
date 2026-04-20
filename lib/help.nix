@@ -1,7 +1,7 @@
 { root }: let
   getModuleFile = fileName: moduleName:
     let path = root + "/modules/${moduleName}/${fileName}";
-    in if builtins.pathExists path then [ path ] else [ ];
+    in if builtins.pathExists path then path else null;
 
 in {
   getSystemModule = module: getModuleFile "system.nix" module;
