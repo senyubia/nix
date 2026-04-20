@@ -269,9 +269,9 @@
         enableCountdown = false;
 
         powerOptions = [
-          { action = "logout"; enabled = true; keybind = "1"; }
-          { action = "reboot"; enabled = true; keybind = "2"; }
-          { action = "shutdown"; enabled = true; keybind = "3"; }
+          { action = "logout"; enabled = true; }
+          { action = "reboot"; enabled = true; }
+          { action = "shutdown"; enabled = true; }
         ];
       };
     };
