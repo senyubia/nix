@@ -1,8 +1,9 @@
 { config, user, pkgs, inputs, ... }: {
-  programs = {
-    hyprland.enable = true;
-    xwayland.enable = true;
-  };
+  programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
 
   services.displayManager.sddm = {
     enable = true;
