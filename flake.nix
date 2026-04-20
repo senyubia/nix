@@ -28,23 +28,21 @@
 
   outputs = { nixpkgs, nixpkgs-stable, disko, home-manager, ...} @ inputs:
   let
-    getModuleFile = fileName: moduleName:
-      let path = ./. + "/modules/${moduleName}/${fileName}";
-      in if builtins.pathExists path then [ path ] else [ ];
-
+    helpLib = import ./lib/helpers.nix { root = ./.; };
 
     selectedHost = ./hosts/laptop; # TODO: select correct host
     assets = ./assets;
     inherit (import "${selectedHost}/info.nix") host user;
 
     hostModules = import "${selectedHost}/modules.nix";
-    systemModules = builtins.concatLists (map (getModuleFile "system.nix") hostModules.modules);
-    userModules = builtins.concatLists (map (getModuleFile "user.nix") hostModules.modules);
+    systemModules = builtins.concatLists (map helpLib.getSystemModule hostModules.modules);
+    userModules = builtins.concatLists (map helpLib.getUserModule hostModules.modules);
+
   in {
     nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {
       system = host.arch;
 
-      specialArgs = { inherit inputs host user assets; };
+      specialArgs = { inherit inputs helpLib host user assets; };
 
       modules = systemModules ++ [
         {
@@ -87,7 +85,7 @@
             useUserPackages = true;
             backupFileExtension = "backup";
 
-            extraSpecialArgs = { inherit inputs host user assets; };
+            extraSpecialArgs = { inherit inputs helpLib host user assets; };
 
             users.${user.name}.imports = userModules ++ [
               {
