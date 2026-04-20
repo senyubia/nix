@@ -29,7 +29,7 @@
   outputs = { nixpkgs, nixpkgs-stable, disko, home-manager, ...} @ inputs:
   let
     config = import ./config.nix;
-    helpLib = import ./lib/helpers.nix { root = ./.; };
+    helpLib = import ./lib/help.nix { root = ./.; };
 
     assets = ./assets;
     inherit (import "${config.selectedHost}/info.nix") host user;
