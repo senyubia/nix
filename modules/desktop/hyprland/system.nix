@@ -1,9 +1,11 @@
-{ config, user, pkgs, inputs, ... }: {
+{ pkgs, inputs, helpLib, user, ... }: {
+  imports = helpLib.getSystemModule "desktop/noctalia";
+
   programs.hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-    };
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
 
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";
@@ -33,7 +35,5 @@
 
   environment.systemPackages = with pkgs; [
     grimblast
-
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
