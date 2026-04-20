@@ -23,8 +23,7 @@
 
     "displaymanager/ly"
 
-    "desktop/hyprland"
-    "desktop/hyprland-nvidia-laptop-compat"
+    "desktop/hyprland-nvidia-optimus"
 
     "config/locales"
     "config/xdgUserDirs"

@@ -1,4 +1,6 @@
-{
+{ helpLib, ... }: {
+  imports = helpLib.getSystemModule "desktop/hyprland";
+
   specialisation.dgpu.configuration = {
     environment.sessionVariables = {
       LIBVA_DRIVER_NAME = "nvidia";
