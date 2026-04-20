@@ -21,6 +21,8 @@
     "programs/btop"
     "programs/gnupg"
 
+    "displaymanager/ly"
+
     "desktop/hyprland"
     "desktop/hyprland-nvidia-laptop-compat"
 
