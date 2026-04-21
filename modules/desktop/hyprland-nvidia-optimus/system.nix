@@ -1,6 +1,6 @@
-{ helpLib, ... }: {
+{ modules, ... }: {
   imports = [
-    (helpLib.getSystemModule "desktop/hyprland")
+    modules.desktop.hyprland.system
   ];
 
   specialisation.dgpu.configuration = {

@@ -29,20 +29,23 @@
   outputs = { nixpkgs, nixpkgs-stable, disko, home-manager, ...} @ inputs:
   let
     config = import ./config.nix;
-    helpLib = import ./lib/help.nix { root = ./.; };
+    moduleImporter = import ./lib/moduleImporter.nix { root = ./.; };
 
     assets = ./assets;
     inherit (import "${config.selectedHost}/info.nix") host user;
 
-    hostModules = import "${config.selectedHost}/modules.nix";
-    systemModules = builtins.filter (m: m != null) (map helpLib.getSystemModule hostModules.modules);
-    userModules = builtins.filter (m: m != null) (map helpLib.getUserModule hostModules.modules);
+    hostModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.modules; };
+    systemModules = builtins.filter (m: m != null) (map (m: m.system or null) hostModules);
+    userModules = builtins.filter (m: m != null) (map (m: m.user or null) hostModules);
 
   in {
     nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {
       system = host.arch;
 
-      specialArgs = { inherit inputs helpLib host user assets; };
+      specialArgs = {
+        inherit inputs host user assets;
+        modules = moduleImporter.modules;
+      };
 
       modules = systemModules ++ [
         {
@@ -85,7 +88,10 @@
             useUserPackages = true;
             backupFileExtension = "backup";
 
-            extraSpecialArgs = { inherit inputs helpLib host user assets; };
+            extraSpecialArgs = {
+              inherit inputs host user assets;
+              modules = moduleImporter.modules;
+            };
 
             users.${user.name}.imports = userModules ++ [
               {

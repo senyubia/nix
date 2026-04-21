@@ -1,6 +1,6 @@
-{ pkgs, inputs, helpLib, user, ... }: {
+{ modules, pkgs, inputs, user, ... }: {
   imports = [
-    (helpLib.getSystemModule "desktop/noctalia")
+    modules.desktop.noctalia.system
   ];
 
   programs.hyprland = {

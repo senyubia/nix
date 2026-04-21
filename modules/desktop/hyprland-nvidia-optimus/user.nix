@@ -1,5 +1,5 @@
-{ helpLib, ... }: {
+{ modules, ... }: {
   imports = [
-    (helpLib.getUserModule "desktop/hyprland")
+    modules.desktop.hyprland.user
   ];
 }

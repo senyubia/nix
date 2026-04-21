@@ -1,6 +1,6 @@
-{ inputs, helpLib, host, ... }: {
+{ modules, inputs, host, ... }: {
   imports = [
-    (helpLib.getUserModule "desktop/noctalia")
+    modules.desktop.noctalia.user
   ];
 
   wayland.windowManager.hyprland = {
