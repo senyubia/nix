@@ -7,8 +7,8 @@
   inherit (import "${config.selectedHost}/info.nix") host user;
 
   hostModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.modules; };
-  systemModules = builtins.filter (m: m != null) (map (m: m.system or null) hostModules);
-  userModules = builtins.filter (m: m != null) (map (m: m.user or null) hostModules);
+  systemModules = moduleImporter.getSystemModules hostModules;
+  userModules = moduleImporter.getUserModules hostModules;
 
 in {
   nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {

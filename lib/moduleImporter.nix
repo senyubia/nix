@@ -23,4 +23,7 @@
 
 in {
   modules = mkModuleTree (root + "/modules");
+
+  getSystemModules = mods: builtins.filter (m: m != null) (map (m: m.system or null) mods);
+  getUserModules = mods: builtins.filter (m: m != null) (map (m: m.user or null) mods);
 }
