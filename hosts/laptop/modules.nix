@@ -11,4 +11,6 @@
   modules.module.graphical.desktop.hyprland.nvidia-optimus
 
   modules.module.config.stylix
+
+  modules.module.programs.gui.gaming
 ]
