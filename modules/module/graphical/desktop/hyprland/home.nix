@@ -1,6 +1,6 @@
 { modules, inputs, host, ... }: {
   imports = [
-    modules.desktop.noctalia.user
+    modules.module.graphical.desktop.noctalia.home
   ];
 
   wayland.windowManager.hyprland = {

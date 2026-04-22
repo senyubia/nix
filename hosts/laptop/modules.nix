@@ -3,13 +3,12 @@
   modules.group.base.programs.cli
   modules.group.base.programs.gui
 
-  modules.system.bootloader.grub
-  modules.system.gpu.nvidia-optimus
-  modules.system.ssh
+  modules.module.system.bootloader.grub
+  modules.module.system.gpu.nvidia-optimus
+  modules.module.system.ssh
 
-  modules.displaymanager.ly
+  modules.module.graphical.displaymanager.ly
+  modules.module.graphical.desktop.hyprland.nvidia-optimus
 
-  modules.desktop.hyprland.nvidia-optimus
-
-  modules.config.stylix
+  modules.module.config.stylix
 ]

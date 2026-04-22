@@ -1,6 +1,6 @@
 { modules, ... }: {
   imports = [
-    modules.desktop.hyprland.system
+    modules.module.graphical.desktop.hyprland.system
   ];
 
   specialisation.dgpu.configuration = {

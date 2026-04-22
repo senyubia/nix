@@ -1,6 +1,6 @@
 { modules, pkgs, inputs, user, ... }: {
   imports = [
-    modules.desktop.noctalia.system
+    modules.module.graphical.desktop.noctalia.system
   ];
 
   programs.hyprland = {

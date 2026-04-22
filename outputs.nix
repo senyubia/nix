@@ -6,9 +6,9 @@
 
   inherit (import "${config.selectedHost}/info.nix") host user;
 
-  hostModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.modules; };
-  systemModules = moduleImporter.getSystemModules hostModules;
-  userModules = moduleImporter.getUserModules hostModules;
+  wantedModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.modules; };
+  wantedSystemModules = moduleImporter.getSystemModules wantedModules;
+  wantedHomeModules = moduleImporter.getHomeModules wantedModules;
 
 in {
   nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {
@@ -19,7 +19,7 @@ in {
       modules = moduleImporter.modules;
     };
 
-    modules = systemModules ++ [
+    modules = wantedSystemModules ++ [
       {
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -65,7 +65,7 @@ in {
             modules = moduleImporter.modules;
           };
 
-          users.${user.name}.imports = userModules ++ [
+          users.${user.name}.imports = wantedHomeModules ++ [
             {
               home = {
                 username = user.name;
