@@ -1,8 +1,9 @@
 { nixpkgs, nixpkgs-stable, disko, home-manager, ...} @ inputs: let
+  assets = ./assets;
   config = import ./config.nix;
+
   moduleImporter = import ./lib/moduleImporter.nix { root = ./.; };
 
-  assets = ./assets;
   inherit (import "${config.selectedHost}/info.nix") host user;
 
   hostModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.modules; };
