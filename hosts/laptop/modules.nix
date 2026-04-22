@@ -22,7 +22,7 @@
 
   modules.displaymanager.ly
 
-  modules.desktop.hyprland-nvidia-optimus
+  modules.desktop.hyprland.nvidia-optimus
 
   modules.config.locales
   modules.config.xdgUserDirs
