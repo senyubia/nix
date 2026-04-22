@@ -15,7 +15,7 @@ in {
     system = host.arch;
 
     specialArgs = {
-      inherit inputs host user assets;
+      inherit inputs moduleImporter host user assets;
       modules = moduleImporter.modules;
     };
 
@@ -61,7 +61,7 @@ in {
           backupFileExtension = "backup";
 
           extraSpecialArgs = {
-            inherit inputs host user assets;
+            inherit inputs moduleImporter host user assets;
             modules = moduleImporter.modules;
           };
 
