@@ -28,3 +28,7 @@ Files:
 - ```config.nix``` - configuration for the deployment
 - ```flake.nix``` - flake, contains inputs only
 - ```outputs.nix``` - outputs of the flake
+
+## How to use modules
+- importing modules requested by the host (e.g. ```./hosts/laptop/modules.nix```) - use module name (e.g. ```modules.bootloader.grub```), bulk import done in ```outputs.nix```
+- importing a module from another module (extensions, dependency) - import relevant module file (e.g. ```modules.bootloader.grub.system``` from system config, ```modules.bootloader.grub.user``` from user config)
