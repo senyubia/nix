@@ -1,5 +1,5 @@
 {
-  system = { config, pkgs, lib, ... }: {
+  system = { config, pkgs, lib, host, ... }: {
     nixpkgs.config.nvidia.acceptLicense = true;
 
     boot.blacklistedKernelModules = [ "nouveau" ];
@@ -11,8 +11,8 @@
       modesetting.enable = true;
 
       prime = {
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:3:0:0";
+        intelBusId = host.intelBusId;
+        nvidiaBusId = host.nvidiaBusId;
 
         sync.enable = false;
         offload.enable = true;
@@ -40,7 +40,7 @@
         ExecStart = "${pkgs.writeShellScript "disable-dgpu" ''
           sleep 3
           ${pkgs.kmod}/bin/modprobe -r -f nvidia_drm nvidia_modeset
-          echo 1 >> /sys/bus/pci/devices/0000\:03\:00.0/remove
+          echo 1 >> "/sys/bus/pci/devices/${host.nvidiaPciDevice}/remove"
         ''}";
       };
     };
@@ -57,7 +57,7 @@
         ExecStart = "${pkgs.writeShellScript "gpu-postsleep-hook" ''
           sleep 3
           ${pkgs.kmod}/bin/modprobe -r -f nvidia_drm nvidia_modeset
-          echo 1 >> /sys/bus/pci/devices/0000\:03\:00.0/remove
+          echo 1 >> "/sys/bus/pci/devices/${host.nvidiaPciDevice}/remove"
         ''}";
       };
     };
@@ -117,7 +117,7 @@
       nvitop
 
       (writeShellScriptBin "gpu-toggle" ''
-        if [ ! -d "/sys/bus/pci/devices/0000:03:00.0" ]; then
+        if [ ! -d "/sys/bus/pci/devices/${host.nvidiaPciDevice}" ]; then
           SVC=switch-to-nvidia
         else
           SVC=switch-to-intel
