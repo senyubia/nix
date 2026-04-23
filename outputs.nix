@@ -6,7 +6,8 @@
 
   inherit (import "${config.selectedHost}/info.nix") host user;
 
-  wantedModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.getAllModules; };
+  allModules = moduleImporter.getAllModules;
+  wantedModules = import "${config.selectedHost}/modules.nix" { modules = allModules; };
   wantedSystemModules = moduleImporter.getSystemModules wantedModules;
   wantedHomeModules = moduleImporter.getHomeModules wantedModules;
 
@@ -15,8 +16,8 @@ in {
     system = host.arch;
 
     specialArgs = {
-      inherit inputs moduleImporter host user assets;
-      modules = moduleImporter.modules;
+      inherit inputs host user assets;
+      modules = allModules;
     };
 
     modules = wantedSystemModules ++ [
@@ -61,8 +62,8 @@ in {
           backupFileExtension = "backup";
 
           extraSpecialArgs = {
-            inherit inputs moduleImporter host user assets;
-            modules = moduleImporter.modules;
+            inherit inputs host user assets;
+            modules = allModules;
           };
 
           users.${user.name}.imports = wantedHomeModules ++ [
