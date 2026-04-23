@@ -2,11 +2,11 @@
   assets = ./assets;
   config = import ./config.nix;
 
-  moduleImporter = import ./lib/moduleImporter.nix { root = ./.; };
+  moduleImporter = import ./lib/moduleImporter.nix { root = ./.; lib = nixpkgs.lib; };
 
   inherit (import "${config.selectedHost}/info.nix") host user;
 
-  wantedModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.modules; };
+  wantedModules = import "${config.selectedHost}/modules.nix" { modules = moduleImporter.getAllModules; };
   wantedSystemModules = moduleImporter.getSystemModules wantedModules;
   wantedHomeModules = moduleImporter.getHomeModules wantedModules;
 

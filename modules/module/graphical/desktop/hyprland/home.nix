@@ -1,8 +1,4 @@
-{ modules, inputs, host, ... }: {
-  imports = [
-    modules.module.graphical.desktop.noctalia.home
-  ];
-
+{ host, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;  
 

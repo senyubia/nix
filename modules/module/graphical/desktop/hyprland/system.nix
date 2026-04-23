@@ -1,8 +1,4 @@
-{ modules, pkgs, inputs, user, ... }: {
-  imports = [
-    modules.module.graphical.desktop.noctalia.system
-  ];
-
+{ pkgs, inputs, user, ... }: {
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -11,8 +7,8 @@
 
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";
-#    HandleLidSwitchExternalPower = "ignore";
-#    HandleLidSwitchDocker = "ignore";
+    #HandleLidSwitchExternalPower = "ignore";
+    #HandleLidSwitchDocker = "ignore";
   };
 
   services.acpid = {

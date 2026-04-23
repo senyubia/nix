@@ -1,49 +1,38 @@
-{ root }: let
-  getSystemModules = modules: builtins.filter (m: m != null) (map (m: m.system or null) modules);
-  getHomeModules = modules: builtins.filter (m: m != null) (map (m: m.home or null) modules);
-
-  mkModuleTree = path: let
+{ root, lib }: let
+  mkModuleTree = path: modules: let
     contents = builtins.readDir path;
-    hasGroup = builtins.pathExists (path + "/group.nix");
-    hasSystem = builtins.pathExists (path + "/system.nix");
-    hasHome = builtins.pathExists (path + "/home.nix");
+    hasDefault = builtins.pathExists (path + "/default.nix");
 
-    system =
-      if hasGroup && hasSystem then { modules, ... }: {
-        imports = [ (path + "/system.nix") ] ++ (getSystemModules (import (path + "/group.nix") { inherit modules; }));
-      }
-      else if hasGroup then { modules, ... }: {
-        imports = getSystemModules (import (path + "/group.nix") { inherit modules; });
-      }
-      else if hasSystem then (path + "/system.nix")
-      else null;
+    moduleDefinition = if hasDefault then import (path + "/default.nix") { inherit modules; }
+      else { };
 
-    home =
-      if hasGroup && hasHome then { modules, ... }: {
-        imports = [ (path + "/home.nix") ] ++ (getHomeModules (import (path + "/group.nix") { inherit modules; }));
-      }
-      else if hasGroup then { modules, ... }: {
-        imports = getHomeModules (import (path + "/group.nix") { inherit modules; });
-      }
-      else if hasHome then (path + "/home.nix")
-      else null;
+    dependsOn = moduleDefinition.dependsOn or [ ];
 
-    dirs = builtins.listToAttrs (
+    node = {
+      system = { ... }: {
+        imports = (lib.optional hasDefault (moduleDefinition.system or { })) ++ (map (m: m.system) dependsOn);
+      };
+
+      home = { ... }: {
+        imports = (lib.optional hasDefault (moduleDefinition.home or { })) ++ (map (m: m.home) dependsOn);
+      };
+    };
+
+    subdirs = builtins.listToAttrs (
       builtins.concatMap (name: let
           subpath = path + "/${name}";
           type = contents.${name};
         in
           if type == "directory" then
-            [ { name = name; value = mkModuleTree subpath; } ]
-          else [ ]
+          [ { name = name; value = mkModuleTree subpath modules; } ]
+        else [ ]
       ) (builtins.attrNames contents)
     );
 
-  in {
-    inherit system home;
-  } // dirs;
+  in node // subdirs;
 
 in {
-  inherit getSystemModules getHomeModules;
-  modules = mkModuleTree (root + "/modules");
+  getAllModules = lib.makeExtensible (modules: mkModuleTree (root + "/modules") modules);
+  getSystemModules = modules: map (m: m.system) modules;
+  getHomeModules = modules: map (m: m.home) modules;
 }
