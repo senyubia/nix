@@ -1,4 +1,4 @@
-{ modules, ... }: {
+{ modules }: {
   dependsOn = [
     modules.module.system.network
     modules.module.system.audio

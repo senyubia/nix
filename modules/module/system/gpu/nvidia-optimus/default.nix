@@ -1,4 +1,4 @@
-{ ... }: {
+{
   system = { config, pkgs, lib, ... }: {
     nixpkgs.config.nvidia.acceptLicense = true;
 

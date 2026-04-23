@@ -1,4 +1,4 @@
-{ ... }: {
+{
   system = {
     time.timeZone = "Europe/Warsaw";
 

@@ -1,4 +1,4 @@
-{ ... }: {
+{
   system = {
     services.pipewire = {
       enable = true;

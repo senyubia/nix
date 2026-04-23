@@ -1,4 +1,4 @@
-{ modules, ... }: {
+{ modules }: {
   dependsOn = [
     modules.module.graphical.desktop.noctalia
   ];

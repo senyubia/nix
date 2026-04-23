@@ -1,4 +1,4 @@
-{ ... }: {
+{
   home = { config, ...}: {
     xdg.userDirs = {
       enable = true;

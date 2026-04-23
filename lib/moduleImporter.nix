@@ -3,8 +3,8 @@
     contents = builtins.readDir path;
     hasDefault = builtins.pathExists (path + "/default.nix");
 
-    moduleDefinition = if hasDefault then import (path + "/default.nix") { inherit modules; }
-      else { };
+    moduleImport = if hasDefault then import (path + "/default.nix") else { };
+    moduleDefinition = if builtins.isFunction moduleImport then moduleImport { inherit modules; } else moduleImport;
 
     dependsOn = moduleDefinition.dependsOn or [ ];
 
