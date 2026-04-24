@@ -8,6 +8,7 @@
     yazi
     dysk
     imv
+    micro
 
     # system tools
     lshw
