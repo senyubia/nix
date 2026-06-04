@@ -34,6 +34,14 @@ in {
                 config.allowUnfree = true;
               };
             })
+
+            (final: prev:
+              builtins.mapAttrs (name: attr:
+                (import (builtins.fetchTarball { inherit (attr) url sha256; }) {
+                  system = host.arch;
+                  config.allowUnfree = true;
+                }).${name}) (import "${config.selectedHost}/pins.nix")
+            )
           ];
         };
 
