@@ -1,6 +1,7 @@
 { host, ... }: {
   wayland.windowManager.hyprland = {
-    enable = true;  
+    enable = true;
+    configType = "hyprlang";
 
     settings = {
       monitor = [
@@ -47,7 +48,6 @@
       };
 
       dwindle = {
-        pseudotile = true;
         preserve_split = true;
       };
 
