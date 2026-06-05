@@ -6,6 +6,7 @@
   modules.module.system.bootloader.grub
   modules.module.system.gpu.nvidia-optimus
   modules.module.system.ssh
+  modules.module.system.elevation.sudo
 
   modules.module.graphical.displaymanager.ly
   modules.module.graphical.desktop.hyprland.nvidia-optimus
