@@ -4,10 +4,10 @@
 
   moduleImporter = import ./lib/moduleImporter.nix { root = ./.; lib = nixpkgs.lib; };
 
-  inherit (import "${config.selectedHost}/info.nix") host user;
+  inherit (import (config.selectedHost + "/info.nix")) host user;
 
   allModules = moduleImporter.getAllModules;
-  wantedModules = import "${config.selectedHost}/modules.nix" { modules = allModules; };
+  wantedModules = import (config.selectedHost + "/modules.nix") { modules = allModules; };
   wantedSystemModules = moduleImporter.getSystemModules wantedModules;
   wantedHomeModules = moduleImporter.getHomeModules wantedModules;
 
@@ -27,26 +27,24 @@ in {
         nixpkgs = {
           config.allowUnfree = true;
 
-          overlays = [
-            (final: prev: let
-              stablePkgs = import nixpkgs-stable {
+          overlays = [(final: prev: let
+            stablePkgs = import nixpkgs-stable {
+              system = host.arch;
+              config.allowUnfree = true;
+            };
+
+            pinnedPkgs = builtins.mapAttrs (name: attr:
+              (import (builtins.fetchTarball { inherit (attr) url sha256; }) {
                 system = host.arch;
                 config.allowUnfree = true;
-              };
-
-              pinnedPkgs = builtins.mapAttrs (name: attr:
-                (import (builtins.fetchTarball { inherit (attr) url sha256; }) {
-                  system = host.arch;
-                  config.allowUnfree = true;
-                }).${name}) (import "${config.selectedHost}/pins.nix");
-              
-              flakesPkgs = {
-                noctalia = inputs.noctalia.packages.${host.arch}.default;
-              };
-            in
-              pinnedPkgs // { stable = stablePkgs; flake = flakesPkgs; }
-            )
-          ];
+              }).${name}) (import (config.selectedHost + "/pins.nix"));
+            
+            flakesPkgs = {
+              noctalia = inputs.noctalia.packages.${host.arch}.default;
+            };
+          in
+            pinnedPkgs // { stable = stablePkgs; flake = flakesPkgs; }
+          )];
         };
 
         networking.hostName = host.name;
@@ -60,11 +58,11 @@ in {
         system.stateVersion = host.state;
       }
 
-      "${config.selectedHost}/hardware.nix"
-      "${config.selectedHost}/packages.nix"
+      (config.selectedHost + "/hardware.nix")
+      (config.selectedHost + "/packages.nix")
 
       disko.nixosModules.disko
-      "${config.selectedHost}/disk.nix"
+      (config.selectedHost + "/disk.nix")
 
       home-manager.nixosModules.home-manager
       {
