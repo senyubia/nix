@@ -28,19 +28,23 @@ in {
           config.allowUnfree = true;
 
           overlays = [
-            (final: prev: {
-              stable = import nixpkgs-stable {
+            (final: prev: let
+              stablePkgs = import nixpkgs-stable {
                 system = host.arch;
                 config.allowUnfree = true;
               };
-            })
 
-            (final: prev:
-              builtins.mapAttrs (name: attr:
+              pinnedPkgs = builtins.mapAttrs (name: attr:
                 (import (builtins.fetchTarball { inherit (attr) url sha256; }) {
                   system = host.arch;
                   config.allowUnfree = true;
-                }).${name}) (import "${config.selectedHost}/pins.nix")
+                }).${name}) (import "${config.selectedHost}/pins.nix");
+              
+              flakesPkgs = {
+                noctalia = inputs.noctalia.packages.${host.arch}.default;
+              };
+            in
+              pinnedPkgs // { stable = stablePkgs; flake = flakesPkgs; }
             )
           ];
         };

@@ -1,7 +1,7 @@
 {
-  system = { pkgs, inputs, ... }: {
+  system = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
-      inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
+      flake.noctalia
     ];
   };
 
