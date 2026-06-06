@@ -1,5 +1,5 @@
 { modules }: {
-  dependsOn = [
+  requires = [
     modules.module.system.network
     modules.module.system.audio
     modules.module.system.printing

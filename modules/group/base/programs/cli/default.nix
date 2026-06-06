@@ -1,5 +1,5 @@
 { modules }: {
-  dependsOn = [
+  requires = [
     modules.module.system.shells.zsh
 
     modules.module.programs.cli.fastfetch

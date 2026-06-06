@@ -1,5 +1,5 @@
 { modules }: {
-  dependsOn = [
+  requires = [
     modules.module.graphical.desktop.noctalia
   ];
 

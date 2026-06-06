@@ -6,15 +6,15 @@
     moduleImport = if hasDefault then import (path + "/default.nix") else { };
     moduleDefinition = if builtins.isFunction moduleImport then moduleImport { inherit modules; } else moduleImport;
 
-    dependsOn = moduleDefinition.dependsOn or [ ];
+    requires = moduleDefinition.requires or [ ];
 
     node = {
       system = { ... }: {
-        imports = (lib.optional hasDefault (moduleDefinition.system or { })) ++ (map (m: m.system) dependsOn);
+        imports = (lib.optional hasDefault (moduleDefinition.system or { })) ++ (map (m: m.system) requires);
       };
 
       home = { ... }: {
-        imports = (lib.optional hasDefault (moduleDefinition.home or { })) ++ (map (m: m.home) dependsOn);
+        imports = (lib.optional hasDefault (moduleDefinition.home or { })) ++ (map (m: m.home) requires);
       };
     };
 
