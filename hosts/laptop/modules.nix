@@ -5,6 +5,8 @@
 
   modules.module.system.bootloader.grub
   modules.module.system.gpu.nvidia-optimus
+  modules.module.system.bluetooth
+  modules.module.system.battery
   modules.module.system.ssh
   modules.module.system.elevation.sudo
 
