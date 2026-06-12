@@ -22,7 +22,7 @@
       shellAliases = {
         cat = "bat";
 
-        ls = "eza -h --icons";
+        ls = "eza -h --icons auto";
         l = "ls -al";
         la = "ls -a";
         ll = "ls -l";
