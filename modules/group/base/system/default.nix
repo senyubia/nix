@@ -5,6 +5,6 @@
     modules.module.system.printing
 
     modules.module.config.locales
-    modules.module.config.xdgUserDirs
+    modules.module.config.homedirs
   ];
 }
