@@ -1,5 +1,5 @@
 {
-  system = { pkgs, ... }: {
+  system = { inputs, pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       nh
 
@@ -10,7 +10,12 @@
         fi
 
         for arg do
-          set -- "$@" "nixpkgs#$arg"
+          if [[ "$arg" == *#* ]]; then
+            set -- "$@" "$arg"
+          else
+            set -- "$@" "${inputs.nixpkgs}#$arg"
+          fi
+
           shift
         done
 
