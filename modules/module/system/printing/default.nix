@@ -1,3 +1,5 @@
 {
-  system.services.printing.enable = true;
+  system = {
+    services.printing.enable = true;
+  };
 }

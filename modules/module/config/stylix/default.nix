@@ -10,7 +10,9 @@
     };
   };
 
-  home.stylix.targets = {
-    firefox.profileNames = [ "default" ];
+  home = {
+    stylix.targets = {
+      firefox.profileNames = [ "default" ];
+    };
   };
 }

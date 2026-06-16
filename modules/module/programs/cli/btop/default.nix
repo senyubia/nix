@@ -5,13 +5,15 @@
     ];
   };
 
-  home.programs.btop = {
-    enable = true;
+  home = {
+    programs.btop = {
+      enable = true;
 
-    settings = {
-      force_tty = true;
+      settings = {
+        force_tty = true;
 
-      disks_filter = "exclude=/boot";
+        disks_filter = "exclude=/boot";
+      };
     };
   };
 }

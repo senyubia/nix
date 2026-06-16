@@ -1,3 +1,5 @@
 {
-  system.networking.networkmanager.enable = true;
+  system = {
+    networking.networkmanager.enable = true;
+  };
 }

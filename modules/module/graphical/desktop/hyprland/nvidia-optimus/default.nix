@@ -3,8 +3,8 @@
     modules.module.graphical.desktop.hyprland
   ];
 
-  system.specialisation.dgpu.configuration = {
-    environment.sessionVariables = {
+  system = {
+    specialisation.dgpu.configuration.environment.sessionVariables = {
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       #ELECTRON_OZONE_PLATFORM_HINT = "auto";

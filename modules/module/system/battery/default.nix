@@ -1,3 +1,5 @@
 {
-  system.services.upower.enable = true;
+  system = {
+    services.upower.enable = true;
+  };
 }

@@ -5,7 +5,9 @@
     ];
   };
 
-  home.imports = [
-    ./home.nix
-  ];
+  home = {
+    imports = [
+      ./home.nix
+    ];
+  };
 }
