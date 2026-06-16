@@ -13,6 +13,7 @@
       desktop = null;
       publicShare = null;
       templates = null;
+      projects = null;
     };
 
     home.file."local".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local";
