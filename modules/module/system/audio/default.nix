@@ -9,4 +9,11 @@
 
     security.rtkit.enable = true;
   };
+
+  home = {
+    services.fluidsynth = {
+      enable = true;
+      soundService = "pipewire-pulse";
+    };
+  };
 }
