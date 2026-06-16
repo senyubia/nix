@@ -15,5 +15,7 @@
 
   modules.module.config.stylix
 
+  modules.module.programs.cli.editor.micro
+
   modules.module.programs.gui.gaming
 ]

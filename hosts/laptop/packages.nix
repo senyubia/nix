@@ -7,7 +7,6 @@
     # cli tools
     dysk
     imv
-    micro
     p7zip
 
     # system tools
