@@ -1,0 +1,36 @@
+{
+  system = {
+    programs.yazi = {
+      enable = true;
+
+      settings = {
+        yazi = {
+          ratio = [
+            1
+            4
+            3
+          ];
+
+          sort-by = "natural";
+          sort-sensitive = true;
+          sort-reverse = false;
+          sort-dir-first = true;
+  
+          linemode = "none";
+          show-hidden = true;
+          show-symlink = true;
+        };
+      };
+    };
+  };
+
+  home = {
+    programs.yazi = {
+      enable = true;
+
+      shellWrapperName = "y"; 
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+  };
+}

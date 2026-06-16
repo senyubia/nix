@@ -5,7 +5,6 @@
     discord
 
     # cli tools
-    yazi
     dysk
     imv
     micro
