@@ -2,9 +2,6 @@
   system = {
     programs.thunar.enable = true;
 
-    services = {
-      gvfs.enable = true;
-      tumbler.enable = true;
-    };
+    services.tumbler.enable = true;
   };
 }
