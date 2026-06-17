@@ -20,6 +20,8 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
+        e = "$EDITOR";
+
         cat = "bat";
 
         ls = "eza -h --icons auto";
