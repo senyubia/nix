@@ -13,9 +13,11 @@
   modules.module.graphical.displaymanager.ly
   modules.module.graphical.desktop.hyprland.nvidia-optimus
 
-  modules.module.config.stylix
-
+  modules.module.system.shells.zsh
   modules.module.programs.cli.editor.micro
+  modules.module.programs.cli.yazi
+
+  modules.module.config.stylix
 
   modules.module.programs.gui.gaming
 ]
