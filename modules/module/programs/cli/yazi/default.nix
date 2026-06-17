@@ -5,6 +5,7 @@
     services.gvfs.enable = true;
     environment.systemPackages = with pkgs; [
       glib
+      trash-cli
     ];
   };
 
@@ -40,12 +41,16 @@
           package = gvfs;
           setup = true;
         };
+        recycle-bin = {
+          package = recycle-bin;
+          setup = true;
+        };
       };
 
       keymap = {
         mgr = {
           prepend_keymap = [
-            # GVFS plugin
+            # gvfs plugin
             { on = [ "M" "m" ]; run = "plugin gvfs -- select-then-mount --jump"; desc = "Select device to mount and jump to its mount point"; }
             { on = [ "M" "u" ]; run = "plugin gvfs -- select-then-unmount --eject"; desc = "Select device then eject"; }
             { on = [ "M" "U" ]; run = "plugin gvfs -- select-then-unmount --eject --force"; desc = "Select device then force eject"; }
@@ -54,6 +59,9 @@
             { on = [ "M" "a" ]; run = "plugin gvfs -- add-mount"; desc = "Add a GVFS mount URI"; }
             { on = [ "M" "e" ]; run = "plugin gvfs -- edit-mount"; desc = "Edit a GVFS mount URI"; }
             { on = [ "M" "r" ]; run = "plugin gvfs -- remove-mount"; desc = "Remove a GVFS mount URI"; }
+
+            # recycle-bin plugin
+            { on = [ "R" ]; run = "plugin recycle-bin"; desc = "Open Recycle Bin menu"; }
           ];
         };
       };
