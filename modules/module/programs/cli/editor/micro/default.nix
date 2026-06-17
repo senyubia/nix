@@ -11,4 +11,8 @@
       };
     };
   };
+
+  home = {
+    programs.micro.enable = true;
+  };
 }
