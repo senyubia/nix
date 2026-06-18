@@ -26,5 +26,37 @@
     };
   };
 
-  outputs = inputs: import ./outputs.nix inputs;
+  outputs = { nixpkgs, disko, home-manager, ... } @ inputs: let
+    assets = ./assets;
+    cfg = import ./config.nix;
+
+    moduleImporter = import ./lib/moduleImporter.nix { root = ./.; lib = nixpkgs.lib; };
+
+    inherit (import (cfg.selectedHost + "/info.nix")) host user;
+
+    allModules = moduleImporter.getAllModules;
+    wantedModules = import (cfg.selectedHost + "/modules.nix") { modules = allModules; };
+    wantedSystemModules = moduleImporter.getSystemModules wantedModules;
+    wantedHomeModules = moduleImporter.getHomeModules wantedModules;
+  in {
+    nixosConfigurations.${host.name} = nixpkgs.lib.nixosSystem {
+      system = host.arch;
+
+      specialArgs = {
+        inherit inputs host user assets;
+      };
+
+      modules = wantedSystemModules ++ [
+        (import ./base_system.nix cfg)
+        (import ./base_home.nix wantedHomeModules)
+
+        (cfg.selectedHost + "/hardware.nix")
+        (cfg.selectedHost + "/packages.nix")
+        (cfg.selectedHost + "/disk.nix")
+
+        disko.nixosModules.disko 
+        home-manager.nixosModules.home-manager 
+      ];
+    };
+  };
 }
