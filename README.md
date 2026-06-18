@@ -26,11 +26,12 @@ Directories:
 
 Files:
 - ```config.nix``` - configuration for the deployment
-- ```flake.nix``` - flake, contains inputs only
-- ```outputs.nix``` - outputs of the flake
+- ```flake.nix``` - system flake
+- ```base_system.nix``` - base of the system
+- ```base_home.nix``` - base of the user's home
 
 ## How to use modules
 - need to use ```lib/moduleImporter.nix``` in flake outputs to work
 - use module name (e.g. ```modules.bootloader.grub```)
-- bulk import of modules requested by the host (e.g. ```./hosts/laptop/modules.nix```) done in ```outputs.nix```
+- bulk import of modules requested by the host (e.g. ```./hosts/laptop/modules.nix```) done in ```flake.nix```
 - importing a module from another module (extensions, dependency) - put imported module in ```requires``` list
