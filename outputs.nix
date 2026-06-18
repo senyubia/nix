@@ -17,7 +17,6 @@ in {
 
     specialArgs = {
       inherit inputs host user assets;
-      modules = allModules;
     };
 
     modules = wantedSystemModules ++ [
@@ -73,7 +72,6 @@ in {
 
           extraSpecialArgs = {
             inherit inputs host user assets;
-            modules = allModules;
           };
 
           users.${user.name}.imports = wantedHomeModules ++ [

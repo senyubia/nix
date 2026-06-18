@@ -1,23 +1,23 @@
 { modules }: [
-  modules.group.base.system
-  modules.group.base.programs.cli
-  modules.group.base.programs.gui
+  modules.bundle.base.system
+  modules.bundle.base.program.cli
+  modules.bundle.base.program.gui
 
-  modules.module.system.bootloader.grub
-  modules.module.system.gpu.nvidia-optimus
-  modules.module.system.bluetooth
-  modules.module.system.battery
-  modules.module.system.ssh
-  modules.module.system.elevation.sudo
+  modules.system.bootloader.grub
+  modules.system.gpu.nvidia-optimus
+  modules.system.bluetooth
+  modules.system.battery
+  modules.system.ssh
+  modules.system.elevation.sudo
 
-  modules.module.graphical.displaymanager.ly
-  modules.module.graphical.desktop.hyprland.nvidia-optimus
+  modules.graphical.displaymanager.ly
+  modules.graphical.desktop.hyprland.nvidia-optimus
 
-  modules.module.system.shells.zsh
-  modules.module.programs.cli.editor.micro
-  modules.module.programs.cli.yazi
+  modules.system.shell.zsh
+  modules.program.cli.editor.micro
+  modules.program.cli.yazi
 
-  modules.module.config.stylix
+  modules.config.stylix
 
-  modules.module.programs.gui.gaming
+  modules.program.gui.gaming
 ]

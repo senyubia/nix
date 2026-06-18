@@ -1,6 +1,6 @@
 { modules }: {
   requires = [
-    modules.module.graphical.desktop.noctalia
+    modules.graphical.desktop.noctalia
   ];
 
   system = {

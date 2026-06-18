@@ -1,6 +1,6 @@
 { modules }: {
   requires = [
-    modules.module.graphical.desktop.hyprland
+    modules.graphical.desktop.hyprland
   ];
 
   system = {
