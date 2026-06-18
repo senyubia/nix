@@ -1,5 +1,5 @@
 {
-  system = { inputs, ... }: {
+  system = { inputs, pkgs, ... }: {
     imports = [
       inputs.stylix.nixosModules.stylix
       ./nord.nix
