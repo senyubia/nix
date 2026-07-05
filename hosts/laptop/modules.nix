@@ -24,4 +24,5 @@
 
   # extra
   modules.program.gui.gaming
+  modules.program.gui.virtualisation.virtualbox
 ]
