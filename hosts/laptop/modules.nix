@@ -23,6 +23,7 @@
   modules.program.cli.yazi
 
   # extra
+  modules.program.cli.docker
   modules.program.gui.gaming
   modules.program.gui.virtualisation.virtualbox
 ]
