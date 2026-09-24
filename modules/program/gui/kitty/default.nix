@@ -11,6 +11,7 @@
 
       settings = {
         confirm_os_window_close = 0;
+        remember_window_size = "no";
       };
     };
   };
