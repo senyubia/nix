@@ -3,6 +3,8 @@
     enable = true;
     configType = "hyprlang";
 
+    systemd.enable = false;
+
     settings = {
       monitor = [
         "${host.monitor},${host.resolution}@${host.refreshRate},auto,auto"
