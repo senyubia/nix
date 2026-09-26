@@ -1,8 +1,5 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    # dev
-    gnumake
-
     # applications
     vscode
     discord
