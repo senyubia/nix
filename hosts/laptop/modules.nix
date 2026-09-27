@@ -24,6 +24,7 @@
 
   # extra
   modules.program.cli.docker
+  modules.program.cli.direnv
   modules.program.gui.gaming
   modules.program.gui.virtualisation.virtualbox
 ]
