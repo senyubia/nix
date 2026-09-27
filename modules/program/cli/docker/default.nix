@@ -4,8 +4,6 @@
 
     environment.systemPackages = with pkgs; [
       docker-compose
-      gnumake
-      python3
     ];
-  }
+  };
 }
