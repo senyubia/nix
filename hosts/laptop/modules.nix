@@ -13,7 +13,7 @@
   modules.system.elevation.sudo
 
   # ui
-  modules.graphical.displaymanager.ly
+  modules.graphical.displaymanager.noctalia-greeter
   modules.graphical.desktop.hyprland.nvidia_optimus
   modules.config.stylix
 

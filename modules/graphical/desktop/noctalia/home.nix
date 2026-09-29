@@ -3,51 +3,81 @@
     inputs.noctalia.homeModules.default
   ];
 
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
 
     settings = {
-      general = {
-        avatarImage = "${assets}/logo.gif";
-        lockOnSuspend = true;
+      shell = {
+        avatar_path = "${assets}/pfp.png";
+
+        session.actions = [
+          { action = "lock"; enabled = false; }
+          { action = "logout"; shortcut = ""; }
+          { action = "lock_and_suspend"; enabled = false; }
+          { action = "reboot"; shortcut = ""; }
+          { action = "shutdown"; shortcut = ""; variant = "destructive"; }
+        ];
+
+        offline_mode = true;
+        polkit_agent = true;
+        show_location = false;
+
+        clipboard_enabled = false;
+
+        window_switcher = {
+          style = "compact";
+        };
+
+        screen_corners = {
+          enabled = true;
+        };
+
+        screenshot = {
+          save_to_file = false;
+        };
+
+        greeter_sync = {
+          auto_sync = true;
+        };
       };
 
-      bar = {
-        density = "compact";
+      lockscreen = {
+        fingerprint = false;
+        lock_before_suspend = false;
+        transition = [ ];
+      };
+
+      bar.main = {
         position = "top";
-        showCapsule = false;
-        widgets = {
-          left = [
-            { id = "ControlCenter"; useDistroLogo = true; }
-          ];
+        capsule = false;
+        thickness = 28;
+        margin_ends = 0;
 
-          center = [
-            {
-              id = "Workspace";
-              labelMode = "none";
-              hideUnoccupied = false;
-            }
-          ];
+        start = [ "control-center" ];
+        center = [ "workspaces" ];
+        end = [ "tray" "battery" "clock" ];
+      };
 
-          right = [
-            {
-              id = "Tray";
-              blacklist = [ ];
-              chevronColor = "none";
-            }
-            {
-              id = "Battery";
-              displayMode = "graphic";
-              hideIfNotDetected = false;
-            }
-            {
-              id = "Clock";
-              formatHorizontal = "HH:mm";
-              formatVertical = "HH mm";
-              useMonospacedFont = true;
-              usePrimaryColor = true;
-            }
-          ];
+      widget = {
+        control-center = {
+          custom_image = "${assets}/nixos.png";
+          scale = 1.1;
+        };
+
+        workspaces = {
+          hide_when_empty = false;
+          show_labels = false;
+          show_tooltip = false;
+          pill_scale = 0.8;
+        };
+
+        tray = {
+          drawer = false;
+        };
+
+        battery = {
+          display_mode = "graphic";
+          hide_when_full = false;
         };
       };
 
@@ -55,85 +85,42 @@
         enabled = false;
       };
 
-      calendar = {
-        cards = [
-          { id = "calendar-header-card"; enabled = true; }
-          { id = "calendar-month-card"; enabled = true; }
+      control_center = {
+        sidebar = "none";
+        sidebar_section = "none";
+
+        shortcuts = [
+          { type = "wifi"; }
+          { type = "bluetooth"; }
+          { type = "audio"; }
+          { type = "mic_mute"; }
         ];
       };
 
-      controlCenter = {
-        position = "close_to_bar_button";
-        shortcuts = {
-          left = [
-            { id = "Network"; }
-            { id = "Bluetooth"; }
-            { id = "Notifications"; }
-            { id = "KeepAwake"; }
-            { id = "NightLight"; }
-          ];
-
-          right = [ ];
-        };
-
-        cards = [
-          { id = "profile-card"; enabled = true; }
-          { id = "shortcuts-card"; enabled = true; }
-          { id = "audio-card"; enabled = true; }
-          { id = "brightness-card"; enabled = true; }
-          { id = "media-sysmon-card"; enabled = true; }
-        ];
+      battery = {
+        warning_threshold = 20;
       };
 
-      location = {
-        weatherEnabled = false;
-        firstDayOfWeek = "1";
-        autoLocate = false;
+      desktop_widgets = {
+        enabled = false;
       };
 
-      brightness = {
-        enforceMinimum = false;
+      nightlight = {
+        enabled = false;
       };
 
-      nightLight = {
-        autoSchedule = false;
-        manualSunrise = "06:00";
-        manualSunset = "23:00";
+      weather = {
+        enabled = false;
       };
 
       wallpaper = {
         directory = "${config.home.homeDirectory}/pics/wp";
-        transitionType = [ ];
+        transition = [ ];
       };
 
-      sessionMenu = {
-        enableCountdown = false;
-
-        powerOptions = [
-          { action = "logout"; enabled = true; keybind = "1"; }
-          { action = "reboot"; enabled = true; keybind = "2"; }
-          { action = "shutdown"; enabled = true; keybind = "3"; }
-        ];
+      hooks = {
+        started = "noctalia msg greeter-sync";
       };
-    };
-
-    plugins = {
-      sources = [
-        {
-          enabled = true;
-          name = "Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
-      ];
-
-      states = {
-        polkit-agent = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-      };
-
-      version = 2;
     };
   };
 }

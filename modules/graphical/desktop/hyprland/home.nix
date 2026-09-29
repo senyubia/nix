@@ -12,7 +12,7 @@
       ];
 
       exec-once = [
-        "noctalia-shell &"
+        "noctalia &"
       ];
 
       general = {
@@ -85,23 +85,22 @@
       ];
 
       "$mod" = "SUPER";
-      "$ipc" = "noctalia-shell ipc call";
+      "$ipc" = "noctalia msg";
       bind = [
-        ", XF86AudioRaiseVolume, exec, $ipc volume increase"
-        ", XF86AudioLowerVolume, exec, $ipc volume decrease"
-        ", XF86AudioMute, exec, $ipc volume muteOutput"
-        ", XF86AudioMicMute, exec, $ipc volume muteInput"
+        ", XF86AudioRaiseVolume, exec, $ipc volume-up"
+        ", XF86AudioLowerVolume, exec, $ipc volume-down"
+        ", XF86AudioMute, exec, $ipc volume-mute"
+        ", XF86AudioMicMute, exec, $ipc mic-mute"
 
-        ", XF86MonBrightnessUp, exec, $ipc brightness increase"
-        ", XF86MonBrightnessDown, exec, $ipc brightness decrease"
+        ", XF86MonBrightnessUp, exec, $ipc brightness-up"
+        ", XF86MonBrightnessDown, exec, $ipc brightness-down"
 
-        ", PRINT, exec, grimblast save area"
-        "CONTROL, PRINT, exec, grimblast copy area"
+        ", PRINT, exec, $ipc screenshot-fullscreen"
+        "CONTROL, PRINT, exec, $ipc screenshot-region"
 
-        "$mod, SUPER_L, exec, $ipc controlCenter toggle"
-        "$mod, D, exec, $ipc launcher toggle"
-        "$mod, L, exec, $ipc lockScreen lock"
-        "$mod, W, exec, $ipc wallpaper toggle"
+        "$mod, SUPER_L, exec, $ipc panel-toggle control-center"
+        "$mod, D, exec, $ipc panel-toggle launcher"
+        "$mod, L, exec, $ipc session lock"
 
         "$mod, RETURN, exec, kitty"
         "$mod, Q, killactive,"
@@ -148,15 +147,5 @@
         "$mod, mouse:273, resizewindow"
       ];
     };
-
-    extraConfig = ''
-      layerrule {
-        name = noctalia
-        match:namespace = noctalia-background-.*$
-        ignore_alpha = 0.5
-        blur = true
-        blur_popups = true
-      }
-    '';
   };
 }

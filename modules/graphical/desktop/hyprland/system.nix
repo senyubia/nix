@@ -19,7 +19,7 @@
 
       if [ $lid_state = "closed" ]; then
         /run/wrappers/bin/sudo -u ${user.name} WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 \
-        ${pkgs.flake.noctalia}/bin/noctalia-shell ipc call lockScreen lock
+        ${pkgs.flake.noctalia}/bin/noctalia msg session lock
         sleep 2
 
         systemctl suspend
