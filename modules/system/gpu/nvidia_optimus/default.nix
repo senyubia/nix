@@ -38,7 +38,7 @@
         RemainAfterExit = "yes";
 
         ExecStart = "${pkgs.writeShellScript "disable-dgpu" ''
-          sleep 3
+          sleep 5
           ${pkgs.kmod}/bin/modprobe -r -f nvidia_drm nvidia_modeset
           echo 1 >> "/sys/bus/pci/devices/${host.nvidiaPciDevice}/remove"
         ''}";
@@ -55,7 +55,7 @@
         Type = "oneshot";
 
         ExecStart = "${pkgs.writeShellScript "gpu-postsleep-hook" ''
-          sleep 3
+          sleep 5
           ${pkgs.kmod}/bin/modprobe -r -f nvidia_drm nvidia_modeset
           echo 1 >> "/sys/bus/pci/devices/${host.nvidiaPciDevice}/remove"
         ''}";
@@ -76,7 +76,7 @@
 
       systemd.services.gpu-switching.serviceConfig.ExecStart = lib.mkForce "${pkgs.writeShellScript "enable-dgpu" ''
         echo 1 >> /sys/bus/pci/rescan
-        sleep 3
+        sleep 5
         ${pkgs.kmod}/bin/modprobe nvidia_drm nvidia_modeset
       ''}";
 
@@ -93,7 +93,7 @@
 
         ExecStart = "${pkgs.writeShellScript "switch-intel" ''
           systemctl stop display-manager
-          sleep 3
+          sleep 5
           /nix/var/nix/profiles/system/bin/switch-to-configuration test
         ''}";
       };
@@ -107,7 +107,7 @@
 
         ExecStart = "${pkgs.writeShellScript "switch-nvidia" ''
           systemctl stop display-manager
-          sleep 3
+          sleep 5
           /nix/var/nix/profiles/system/specialisation/dgpu/bin/switch-to-configuration test
         ''}";
       };
