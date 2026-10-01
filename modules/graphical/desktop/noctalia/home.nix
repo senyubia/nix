@@ -42,7 +42,7 @@
         };
 
         panel = {
-          transparency_mode = "glass";
+          transparency_mode = "soft";
         };
       };
 
