@@ -14,7 +14,7 @@
 
   # ui
   modules.graphical.displaymanager.noctalia-greeter
-  modules.graphical.desktop.hyprland.nvidia_optimus
+  modules.graphical.desktop.umbriel.nvidia_optimus
   modules.config.stylix
 
   # base apps
