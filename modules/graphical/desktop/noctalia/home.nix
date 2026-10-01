@@ -33,6 +33,7 @@
         };
 
         screenshot = {
+          annotate = true;
           save_to_file = false;
         };
 
