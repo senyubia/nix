@@ -1,4 +1,4 @@
-{ config, inputs, assets, ... }: {
+{ lib, config, inputs, assets, ... }: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -40,6 +40,10 @@
         greeter_sync = {
           auto_sync = true;
         };
+
+        panel = {
+          transparency_mode = "glass";
+        };
       };
 
       lockscreen = {
@@ -53,6 +57,7 @@
         capsule = false;
         thickness = 28;
         margin_ends = 0;
+        background_opacity = 0.8;
 
         start = [ "control-center" ];
         center = [ "workspaces" ];
@@ -84,6 +89,7 @@
 
       dock = {
         enabled = false;
+        background_opacity = 0.8;
       };
 
       control_center = {
@@ -96,6 +102,14 @@
           { type = "audio"; }
           { type = "mic_mute"; }
         ];
+      };
+
+      notification = {
+        background_opacity = lib.mkForce 0.8;
+      };
+
+      osd = {
+        background_opacity = lib.mkForce 0.8;
       };
 
       battery = {
